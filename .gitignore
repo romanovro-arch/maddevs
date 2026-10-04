@@ -1,0 +1,21 @@
+# IDE & Editor
+.projectbrain/
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# SQLite databases
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Build & Logs
+dist/
+build/
+.next/
+*.log
+.env
+.env.local

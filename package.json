@@ -1,0 +1,14 @@
+{
+  "name": "maddevs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"backend,frontend\" -c \"magenta,cyan\" \"bun --cwd backend run dev\" \"bun --cwd frontend run dev\"",
+    "build": "bun --cwd frontend run build",
+    "test": "bun --cwd backend test tests/concurrency.test.ts",
+    "seed": "bun --cwd backend run src/db/seed.ts"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

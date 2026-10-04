@@ -67,21 +67,22 @@ maddevs/
 ```bash
 git clone https://github.com/romanovro-arch/maddevs.git
 cd maddevs
+bun install
 ```
 
-### 2. Start Backend Server
+### 2. Start Both Projects (One Command)
 ```bash
-cd backend
-bun install
-bun run seed         # Pre-seeds demo conference with full capacity & waitlist
-bun run dev          # Running on http://localhost:3001
+bun run dev
 ```
+> Runs both **Backend** (`http://localhost:3001`) and **Frontend** (`http://localhost:3000`) simultaneously via `concurrently`!
 
-### 3. Start Frontend Dashboard
+### 3. (Optional) Run Separately
 ```bash
-cd ../frontend
-bun install
-bun run dev          # Running on http://localhost:3000
+# Backend only:
+bun --cwd backend run dev
+
+# Frontend only:
+bun --cwd frontend run dev
 ```
 
 ---

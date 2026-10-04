@@ -10,6 +10,7 @@ import { Badge } from "@workspace/ui/components/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@workspace/ui/components/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@workspace/ui/components/table";
 import { RescheduleDialog } from "@/components/RescheduleDialog";
+import { AttendanceAreaChart } from "@/components/AttendanceAreaChart";
 import {
   Users,
   Clock,
@@ -243,6 +244,9 @@ export default function DashboardPage({ params }: { params: Promise<{ id: string
           </CardContent>
         </Card>
       </div>
+
+      {/* Real-time Attendance & Registration Area Chart */}
+      <AttendanceAreaChart participants={participants} capacity={capacity} />
 
       {/* Participants & Waitlist Tabs Table */}
       <Card className="border shadow-sm bg-card overflow-hidden">

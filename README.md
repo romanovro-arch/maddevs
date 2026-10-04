@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/oneheka/maddevs">
+  <a href="https://github.com/romanovro-arch/maddevs">
     <img src="https://img.shields.io/badge/MadEvents-Event_Registration_Platform-6366f1?style=for-the-badge&logo=ticketmaster&logoColor=white" alt="MadEvents" />
   </a>
 </p>
@@ -65,7 +65,7 @@ maddevs/
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/oneheka/maddevs.git
+git clone https://github.com/romanovro-arch/maddevs.git
 cd maddevs
 ```
 

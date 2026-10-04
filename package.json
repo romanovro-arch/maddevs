@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "install:all": "bun install && bun --cwd backend install && bun --cwd frontend install",
     "dev": "concurrently -n \"backend,frontend\" -c \"magenta,cyan\" \"bun --cwd backend run dev\" \"bun --cwd frontend run dev\"",
     "build": "bun --cwd frontend run build",
     "test": "bun --cwd backend test tests/concurrency.test.ts",

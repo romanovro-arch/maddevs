@@ -17,7 +17,9 @@ import {
   Clock,
   Sparkles,
   Zap,
+  Volume2,
 } from "lucide-react";
+import { playSuccessSound, playErrorSound } from "@/lib/sound";
 
 interface ScanLogItem {
   id: string;
@@ -70,6 +72,12 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
       const res = await api.checkIn(cleanCode);
       setResult(res);
 
+      if (res.success) {
+        playSuccessSound();
+      } else {
+        playErrorSound();
+      }
+
       const logItem: ScanLogItem = {
         id: Math.random().toString(),
         code: cleanCode,
@@ -83,6 +91,7 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
       setRecentScans((prev) => [logItem, ...prev.slice(0, 9)]);
       setCode("");
     } catch (err: any) {
+      playErrorSound();
       setResult({
         success: false,
         code: "ERROR",

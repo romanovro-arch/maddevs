@@ -24,6 +24,7 @@ import {
   AlertCircle,
   Sparkles,
   RefreshCw,
+  Download,
 } from "lucide-react";
 
 export default function DashboardPage({ params }: { params: Promise<{ id: string }> }) {
@@ -99,6 +100,28 @@ export default function DashboardPage({ params }: { params: Promise<{ id: string
     dateStyle: "full",
     timeStyle: "short",
   });
+
+  const exportCsv = () => {
+    const headers = ["#", "Email", "Статус", "Код билета", "Статус билета", "Время входа"];
+    const rows = participants.map((p, idx) => [
+      idx + 1,
+      p.email,
+      p.status,
+      p.ticketCode || "—",
+      p.ticketStatus || "—",
+      p.checkedInAt ? new Date(p.checkedInAt).toLocaleString("ru-RU") : "—",
+    ]);
+    const csvContent =
+      "data:text/csv;charset=utf-8,\uFEFF" +
+      [headers.join(";"), ...rows.map((e) => e.join(";"))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `attendees_${event.id}_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="container mx-auto px-4 sm:px-8 py-8 max-w-6xl space-y-8">
@@ -260,16 +283,29 @@ export default function DashboardPage({ params }: { params: Promise<{ id: string
                 </CardDescription>
               </div>
 
-              <TabsList className="grid grid-cols-2 w-full sm:w-auto">
-                <TabsTrigger value="confirmed" className="text-xs gap-1.5">
-                  <Users className="h-3.5 w-3.5" />
-                  <span>Участники ({confirmedList.length})</span>
-                </TabsTrigger>
-                <TabsTrigger value="waitlist" className="text-xs gap-1.5">
-                  <Clock className="h-3.5 w-3.5" />
-                  <span>Лист ожидания ({waitlistList.length})</span>
-                </TabsTrigger>
-              </TabsList>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={exportCsv}
+                  className="text-xs h-9 gap-1.5 shrink-0"
+                  title="Скачать список участников в формате CSV"
+                >
+                  <Download className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span>Экспорт CSV</span>
+                </Button>
+
+                <TabsList className="grid grid-cols-2 w-full sm:w-auto">
+                  <TabsTrigger value="confirmed" className="text-xs gap-1.5">
+                    <Users className="h-3.5 w-3.5" />
+                    <span>Участники ({confirmedList.length})</span>
+                  </TabsTrigger>
+                  <TabsTrigger value="waitlist" className="text-xs gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />
+                    <span>Лист ожидания ({waitlistList.length})</span>
+                  </TabsTrigger>
+                </TabsList>
+              </div>
             </div>
           </CardHeader>
 
